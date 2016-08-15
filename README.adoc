@@ -1,0 +1,18 @@
+== Spring LDAP integration with Spring Boot
+
+Maven:
+
+[source, xml]
+----
+<dependency>
+    <groupId>com.github.eddumelendez.ldap</groupId>
+    <artifactId>ldap-spring-boot-starter</artifactId>
+    <version>1.0.0</version>
+</dependency>
+----
+
+Gradle:
+[source, groovy]
+----
+compile "com.github.eddumelendez.ldap:ldap-spring-boot-starter:1.0.0"
+----
