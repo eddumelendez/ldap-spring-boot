@@ -1,0 +1,44 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            url 'http://repo.spring.io/plugins-release'
+        }
+    }
+    dependencies {
+        classpath "org.springframework.build.gradle:propdeps-plugin:0.0.7"
+        classpath "io.spring.gradle:dependency-management-plugin:0.6.0.RELEASE"
+    }
+}
+
+description = "LDAP integration with Spring Boot"
+
+allprojects {
+
+    apply plugin: "java"
+    apply plugin: "io.spring.dependency-management"
+
+    group='com.github.eddumelendez.ldap'
+
+    sourceCompatibility=1.6
+    targetCompatibility=1.6
+
+    ext.springBootVersion='1.4.0.RELEASE'
+    ext.springLdapVersion='2.1.0.RELEASE'
+    ext.unboundidVersion='3.1.1'
+
+    dependencyManagement {
+        dependencies {
+            imports {
+                mavenBom "org.springframework.boot:spring-boot-dependencies:${springBootVersion}"
+            }
+            dependency "org.springframework.ldap:spring-ldap-core:${springLdapVersion}"
+            dependency "com.unboundid:unboundid-ldapsdk:${unboundidVersion}"
+        }
+    }
+
+    repositories {
+        mavenCentral()
+    }
+
+}
