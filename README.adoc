@@ -1,5 +1,7 @@
 == Spring LDAP integration with Spring Boot
 
+image:https://travis-ci.org/eddumelendez/ldap-spring-boot.svg?branch=master["Build Status", link="https://travis-ci.org/eddumelendez/ldap-spring-boot"]
+
 Maven:
 
 [source, xml]
