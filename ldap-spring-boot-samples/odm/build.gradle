@@ -1,0 +1,33 @@
+buildscript {
+    ext {
+        springBootVersion = '1.4.0.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'spring-boot'
+
+jar {
+    baseName = 'demo'
+    version = '0.0.1-SNAPSHOT'
+}
+sourceCompatibility = 1.6
+targetCompatibility = 1.6
+
+repositories {
+    mavenCentral()
+}
+
+
+dependencies {
+    compile project(':ldap-spring-boot-starter')
+    testCompile "org.springframework.boot:spring-boot-starter-test"
+    testCompile "com.unboundid:unboundid-ldapsdk:3.1.1"
+}

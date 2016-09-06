@@ -1,5 +1,6 @@
 rootProject.name = 'ldap-spring-boot'
 
 include 'ldap-spring-boot-autoconfigure'
-include 'ldap-spring-boot-samples'
+include 'ldap-spring-boot-samples/odm'
+include 'ldap-spring-boot-samples/plain'
 include 'ldap-spring-boot-starter'

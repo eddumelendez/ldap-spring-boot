@@ -4,8 +4,10 @@ dependencies {
     compile "org.springframework.boot:spring-boot"
     compile "org.springframework.boot:spring-boot-autoconfigure"
     compile "org.springframework.data:spring-data-commons"
-    compile "org.springframework.ldap:spring-ldap-core"
-    compile "com.unboundid:unboundid-ldapsdk"
+    compile("org.springframework.ldap:spring-ldap-core") {
+        exclude group: "org.slf4j", module: "slf4j-api"
+    }
+    optional "com.unboundid:unboundid-ldapsdk"
     optional "org.springframework.boot:spring-boot-configuration-processor"
 
     testCompile "org.springframework.boot:spring-boot-starter-test"
