@@ -1,14 +1,27 @@
 apply plugin: "propdeps"
+apply plugin: "io.spring.dependency-management"
+
+ext.springBootVersion='1.4.0.RELEASE'
+ext.springLdapVersion='2.1.0.RELEASE'
+ext.unboundidVersion='3.1.1'
 
 dependencies {
     compile "org.springframework.boot:spring-boot"
     compile "org.springframework.boot:spring-boot-autoconfigure"
     compile "org.springframework.data:spring-data-commons"
-    compile("org.springframework.ldap:spring-ldap-core") {
+    compile("org.springframework.ldap:spring-ldap-core:${springLdapVersion}") {
         exclude group: "org.slf4j", module: "slf4j-api"
     }
-    optional "com.unboundid:unboundid-ldapsdk"
+    optional "com.unboundid:unboundid-ldapsdk:${unboundidVersion}"
     optional "org.springframework.boot:spring-boot-configuration-processor"
 
     testCompile "org.springframework.boot:spring-boot-starter-test"
+}
+
+dependencyManagement {
+    dependencies {
+        imports {
+            mavenBom "org.springframework.boot:spring-boot-dependencies:${springBootVersion}"
+        }
+    }
 }
