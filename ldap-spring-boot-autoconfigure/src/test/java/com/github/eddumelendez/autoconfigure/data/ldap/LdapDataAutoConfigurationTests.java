@@ -23,9 +23,14 @@ import org.junit.Test;
 import org.springframework.boot.autoconfigure.PropertyPlaceholderAutoConfiguration;
 import org.springframework.boot.test.util.EnvironmentTestUtils;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.ldap.core.ContextSource;
 import org.springframework.ldap.core.LdapTemplate;
+import org.springframework.ldap.core.support.LdapContextSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
 
 /**
  * Tests for {@link LdapDataAutoConfiguration}
@@ -51,6 +56,35 @@ public class LdapDataAutoConfigurationTests {
 		this.context.refresh();
 		assertThat(this.context.getBeanNamesForType(LdapTemplate.class).length)
 				.isEqualTo(1);
+	}
+
+	@Test
+	public void resolvePrimaryContextSourceBean() {
+		this.context = new AnnotationConfigApplicationContext();
+		EnvironmentTestUtils.addEnvironment(this.context,
+				"spring.ldap.urls:ldap://localhost:389");
+		this.context.register(PropertyPlaceholderAutoConfiguration.class,
+				LdapCustomConfiguration.class, LdapAutoConfiguration.class,
+				LdapDataAutoConfiguration.class);
+		this.context.refresh();
+		assertThat(this.context.getBeanNamesForType(LdapTemplate.class).length)
+				.isEqualTo(0);
+	}
+
+
+	@Configuration
+	static class LdapCustomConfiguration {
+
+		@Bean
+		public ContextSource contextSource1() {
+			return mock(LdapContextSource.class);
+		}
+
+		@Bean
+		public ContextSource contextSource2() {
+			return mock(LdapContextSource.class);
+		}
+
 	}
 
 }

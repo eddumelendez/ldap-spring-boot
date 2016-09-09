@@ -24,6 +24,7 @@ import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnSingleCandidate;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.ldap.core.ContextSource;
@@ -44,6 +45,7 @@ public class LdapDataAutoConfiguration {
 
 	@Bean
 	@ConditionalOnMissingBean(LdapOperations.class)
+	@ConditionalOnSingleCandidate(ContextSource.class)
 	public LdapTemplate ldapTemplate(ContextSource contextSource) {
 		return new LdapTemplate(contextSource);
 	}
