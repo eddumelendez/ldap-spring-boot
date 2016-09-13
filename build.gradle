@@ -29,4 +29,20 @@ configure(coreModules) {
         mavenCentral()
     }
 
+    task sourcesJar(type: Jar) {
+        classifier 'sources'
+        from sourceSets.main.allSource
+    }
+
+    task javadocJar(type: Jar, dependsOn: javadoc) {
+        classifier 'javadoc'
+        from javadoc.destinationDir
+    }
+
+    artifacts {
+        archives sourcesJar
+    }
+
+    assemble.dependsOn sourcesJar, javadocJar
+
 }
