@@ -14,11 +14,12 @@ buildscript {
 description = "LDAP integration with Spring Boot"
 
 ext.sampleModules = subprojects.findAll { project -> project.name.endsWith('plain') || project.name.endsWith('odm') }
-ext.coreModules = allprojects - sampleModules
+ext.coreModules = subprojects - sampleModules
 
 configure(coreModules) {
 
     apply plugin: "java"
+    apply plugin: "propdeps-maven"
 
     group='com.github.eddumelendez.ldap'
 
@@ -41,8 +42,58 @@ configure(coreModules) {
 
     artifacts {
         archives sourcesJar
+        archives javadocJar
     }
 
     assemble.dependsOn sourcesJar, javadocJar
 
+    install {
+        repositories.mavenInstaller {
+            customizePom(pom, project)
+        }
+    }
+
+}
+
+def customizePom(pom, gradleProject) {
+    pom.whenConfigured { generatedPom ->
+        // eliminate test-scoped dependencies (no need in maven central poms)
+        generatedPom.dependencies.removeAll { dep ->
+            dep.scope == "test"
+        }
+
+        // sort to make pom dependencies order consistent to ease comparison of older poms
+        generatedPom.dependencies = generatedPom.dependencies.sort { dep ->
+            "$dep.scope:$dep.groupId:$dep.artifactId"
+        }
+
+        generatedPom.project {
+            name = gradleProject.description
+            description = gradleProject.description
+            url = "https://github.com/eddumelendez/ldap-spring-boot"
+            licenses {
+                license {
+                    name "The Apache Software License, Version 2.0"
+                    url "http://www.apache.org/licenses/LICENSE-2.0.txt"
+                    distribution "repo"
+                }
+            }
+            scm {
+                url = "https://github.com/eddumelendez/ldap-spring-boot"
+                connection = "scm:git:git://github.com/eddumelendez/ldap-spring-boot"
+                developerConnection = "scm:git:git://github.com/eddumelendez/ldap-spring-boot"
+            }
+            developers {
+                developer {
+                    id = "eddumelendez"
+                    name = "Eddú Meléndez"
+                    email = "eddu.melendez@gmail.com"
+                }
+            }
+            issueManagement {
+                system = "GitHub"
+                url = "https://github.com/eddumelendez/ldap-spring-boot/issues"
+            }
+        }
+    }
 }

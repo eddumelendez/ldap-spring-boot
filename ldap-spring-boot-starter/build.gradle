@@ -1,3 +1,5 @@
+description = "Spring Boot LDAP Starter"
+
 dependencies {
     compile project(":ldap-spring-boot-autoconfigure")
 }
