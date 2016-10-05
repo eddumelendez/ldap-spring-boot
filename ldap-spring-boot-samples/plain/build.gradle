@@ -29,5 +29,5 @@ repositories {
 dependencies {
 	compile project(':ldap-spring-boot-starter')
 	testCompile "org.springframework.boot:spring-boot-starter-test"
-	testCompile "com.unboundid:unboundid-ldapsdk:3.1.1"
+	testCompile "com.unboundid:unboundid-ldapsdk:3.2.0"
 }
