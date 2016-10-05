@@ -9,12 +9,12 @@ Maven:
 <dependency>
     <groupId>com.github.eddumelendez.ldap</groupId>
     <artifactId>ldap-spring-boot-starter</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.0.RELEASE</version>
 </dependency>
 ----
 
 Gradle:
 [source, groovy]
 ----
-compile "com.github.eddumelendez.ldap:ldap-spring-boot-starter:1.0.0"
+compile "com.github.eddumelendez.ldap:ldap-spring-boot-starter:1.0.0.RELEASE"
 ----
