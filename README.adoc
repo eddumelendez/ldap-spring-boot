@@ -2,6 +2,11 @@
 
 image:https://travis-ci.org/eddumelendez/ldap-spring-boot.svg?branch=master["Build Status", link="https://travis-ci.org/eddumelendez/ldap-spring-boot"]
 
+This project is built on top of http://projects.spring.io/spring-ldap/[spring-ldap] project.
+This project provide auto-configuration for `spring-ldap`.
+
+=== Dependency
+
 Maven:
 
 [source, xml]
@@ -18,3 +23,56 @@ Gradle:
 ----
 compile "com.github.eddumelendez.ldap:ldap-spring-boot-starter:1.0.0.RELEASE"
 ----
+
+=== Properties
+
+The following properties are available to customize the `ContextSource`.
+
+[source, properties]
+----
+ldap.urls= # LDAP urls
+ldap.base= # Base suffix from which all operations should originate.
+ldap.username= # Login user of the LDAP.
+ldap.password= # Login password of the LDAP.
+ldap.base-environment.*= # LDAP custom environment properties.
+----
+
+=== Using Embedded LDAP server
+
+https://www.ldap.com/unboundid-ldap-sdk-for-java[Unboundid SDK LDAP] is provided
+as a embedded LDAP server and it's auto-configured if the dependency is detected.
+
+Add the following dependency:
+
+Maven:
+
+[source, xml]
+----
+<dependency>
+    <groupId>com.unboundid</groupId>
+    <artifactId>unboundid-ldapsdk</artifactId>
+    <version>3.1.1</version>
+    <scope>test</scope>
+</dependency>
+----
+
+Gradle:
+[source, groovy]
+----
+testCompile "com.unboundid:unboundid-ldapsdk:3.1.1"
+----
+
+You can use the following properties to customize the embedded server:
+
+[source, properties]
+----
+ldap.embedded.port= # Embedded LDAP port. Use 0 for random port.
+ldap.embedded.credential.username= # Embedded LDAP username.
+ldap.embedded.credential.passwod= # Embedded LDAP password.
+ldap.embedded.partitionSuffix= # LDAP partition suffix.
+ldap.embedded.ldif= # Schema (LDIF) script resource reference.
+----
+
+=== Examples
+
+You can check the examples https://github.com/eddumelendez/ldap-spring-boot/tree/master/ldap-spring-boot-samples[here].
