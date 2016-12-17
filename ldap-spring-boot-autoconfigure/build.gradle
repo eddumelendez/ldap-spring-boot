@@ -1,7 +1,7 @@
 apply plugin: "propdeps"
 apply plugin: "io.spring.dependency-management"
 
-ext.springBootVersion='1.4.1.RELEASE'
+ext.springBootVersion='1.4.2.RELEASE'
 ext.springLdapVersion='2.2.0.RELEASE'
 ext.unboundidVersion='3.2.0'
 
