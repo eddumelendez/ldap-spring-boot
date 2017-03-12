@@ -4,12 +4,25 @@ buildscript {
         maven {
             url 'http://repo.spring.io/plugins-release'
         }
+        maven {
+            url 'https://plugins.gradle.org/m2/'
+        }
     }
     dependencies {
+        classpath "com.gradle:build-scan-plugin:1.6"
         classpath "org.springframework.build.gradle:propdeps-plugin:0.0.7"
         classpath "io.spring.gradle:dependency-management-plugin:0.6.0.RELEASE"
         classpath "com.bmuschko:gradle-nexus-plugin:2.3.1"
     }
+}
+
+apply plugin: 'com.gradle.build-scan'
+
+buildScan {
+    licenseAgreementUrl = 'https://gradle.com/terms-of-service'
+    licenseAgree = 'yes'
+    tag 'CI'
+    link 'VCS', 'https://github.com/eddumelendez/ldap-spring-boot'
 }
 
 description = "LDAP integration with Spring Boot"
