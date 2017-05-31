@@ -2,6 +2,8 @@
 
 image:https://travis-ci.org/eddumelendez/ldap-spring-boot.svg?branch=master["Build Status", link="https://travis-ci.org/eddumelendez/ldap-spring-boot"]
 
+NOTE: This project is not under development. Spring LDAP support is provided by Spring Boot out-of-the-box since 1.5.0.RELEASE. For more info visit https://docs.spring.io/spring-boot/docs/1.5.0.RELEASE/reference/htmlsingle/#boot-features-ldap[LDAP support in Spring Boot]
+
 This project is built on top of http://projects.spring.io/spring-ldap/[spring-ldap] project.
 This project provide auto-configuration for `spring-ldap`.
 
